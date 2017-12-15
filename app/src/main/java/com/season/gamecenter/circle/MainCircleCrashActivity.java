@@ -1,4 +1,4 @@
-package com.season.gamecenter.ball;
+package com.season.gamecenter.circle;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,10 +13,11 @@ import com.season.util.explosion.ExplosionField;
 
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+public class MainCircleCrashActivity extends AppCompatActivity {
 
     private RelativeLayout mContainerView;
     private GameView mBallView;
+    private Handler handler;
     private ExplosionField mExplosionField;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
+        handler = new Handler();
         mContainerView = new RelativeLayout(this);
 
         textView = new TextView(this);
@@ -40,19 +41,29 @@ public class MainActivity extends AppCompatActivity {
 
         mBallView.listener = new GameView.GoalListener() {
             @Override
-            public void onSuccess(Ball ball) {
-                mExplosionField.explode(ball.getBitmap(), ball.getRect(), 10, 1500);
-                new Handler().postDelayed(new Runnable() {
+            public void onSuccess(final Ball ball) {
+                handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        onLongClick(null);
+                        mExplosionField.explode(ball.getBitmap(), ball.getRect(), 10, 1500);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                onLongClick(null);
+                            }
+                        }, 1500);
                     }
-                }, 1500);
+                });
             }
 
             @Override
-            public void onFail(Ball ball) {
-                mExplosionField.explode(ball.getBitmap(), ball.getRect(), 10, 1500);
+            public void onFail(final Ball ball) {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mExplosionField.explode(ball.getBitmap(), ball.getRect(), 10, 1500);
+                    }
+                });
             }
         };
         mExplosionField = ExplosionField.attach2Window(this);

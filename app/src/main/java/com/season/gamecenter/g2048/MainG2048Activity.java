@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 
-public class MainActivity extends Activity {
+public class MainG2048Activity extends Activity {
 
     private static final String WIDTH = "width";
     private static final String HEIGHT = "height";
@@ -17,12 +17,12 @@ public class MainActivity extends Activity {
     private static final String UNDO_GRID = "undo";
     private static final String GAME_STATE = "game state";
     private static final String UNDO_GAME_STATE = "undo game state";
-    private MainView view;
+    private GameView view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        view = new MainView(this);
+        view = new GameView(this);
 
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         view.hasSaveState = settings.getBoolean("save_state", false);

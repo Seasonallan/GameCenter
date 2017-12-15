@@ -16,11 +16,11 @@ import com.season.gamecenter.R;
 import java.util.ArrayList;
 
 @SuppressWarnings("deprecation")
-public class MainView extends View {
+public class GameView extends View {
 
     //Internal Constants
     static final int BASE_ANIMATION_TIME = 100000000;
-    private static final String TAG = MainView.class.getSimpleName();
+    private static final String TAG = GameView.class.getSimpleName();
     private static final float MERGING_ACCELERATION = (float) -0.5;
     private static final float INITIAL_VELOCITY = (1 - MERGING_ACCELERATION) / 4;
     public final int numCellTypes = 21;
@@ -72,7 +72,7 @@ public class MainView extends View {
     private int titleWidthHighScore;
     private int titleWidthScore;
 
-    public MainView(Context context) {
+    public GameView(Context context) {
         super(context);
 
         Resources resources = context.getResources();

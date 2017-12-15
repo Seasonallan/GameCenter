@@ -15,10 +15,10 @@ public class MainGame {
     public static final int MERGE_ANIMATION = 1;
 
     public static final int FADE_GLOBAL_ANIMATION = 0;
-    private static final long MOVE_ANIMATION_TIME = MainView.BASE_ANIMATION_TIME;
-    private static final long SPAWN_ANIMATION_TIME = MainView.BASE_ANIMATION_TIME;
+    private static final long MOVE_ANIMATION_TIME = GameView.BASE_ANIMATION_TIME;
+    private static final long SPAWN_ANIMATION_TIME = GameView.BASE_ANIMATION_TIME;
     private static final long NOTIFICATION_DELAY_TIME = MOVE_ANIMATION_TIME + SPAWN_ANIMATION_TIME;
-    private static final long NOTIFICATION_ANIMATION_TIME = MainView.BASE_ANIMATION_TIME * 5;
+    private static final long NOTIFICATION_ANIMATION_TIME = GameView.BASE_ANIMATION_TIME * 5;
     private static final int startingMaxValue = 2048;
     //Odd state = game is not active
     //Even state = game is active
@@ -36,7 +36,7 @@ public class MainGame {
     final int numSquaresX = 4;
     final int numSquaresY = 4;
     private final Context mContext;
-    private final MainView mView;
+    private final GameView mView;
     public Grid grid = null;
     public AnimationGrid aGrid;
     public boolean canUndo;
@@ -45,7 +45,7 @@ public class MainGame {
     public long lastScore = 0;
     private long bufferScore = 0;
 
-    public MainGame(Context context, MainView view) {
+    public MainGame(Context context, GameView view) {
         mContext = context;
         mView = view;
         endingMaxValue = (int) Math.pow(2, view.numCellTypes - 1);
